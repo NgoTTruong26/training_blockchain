@@ -34,6 +34,7 @@ export interface MyContractInterface extends utils.Interface {
     "depositOf(address)": FunctionFragment;
     "depositToken(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getBalance(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
@@ -54,6 +55,7 @@ export interface MyContractInterface extends utils.Interface {
       | "depositOf"
       | "depositToken"
       | "getApproved"
+      | "getBalance"
       | "isApprovedForAll"
       | "name"
       | "ownerOf"
@@ -86,6 +88,10 @@ export interface MyContractInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBalance",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
@@ -150,6 +156,7 @@ export interface MyContractInterface extends utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getBalance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -280,6 +287,11 @@ export interface MyContract extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getBalance(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -362,6 +374,11 @@ export interface MyContract extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getBalance(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   isApprovedForAll(
     owner: PromiseOrValue<string>,
     operator: PromiseOrValue<string>,
@@ -443,6 +460,11 @@ export interface MyContract extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getBalance(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -562,6 +584,11 @@ export interface MyContract extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getBalance(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -642,6 +669,11 @@ export interface MyContract extends BaseContract {
 
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getBalance(
+      owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

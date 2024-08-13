@@ -17,9 +17,7 @@ export default function UserBalance() {
       token: tokenAddress as EthAddress,
     })
 
-      console.log("decimals",balance?.decimals);
-
-      const { data: allowance} = useReadContract({
+      const { data: allowance, refetch: allowanceRefetch} = useReadContract({
         address: tokenAddress as EthAddress,  
         abi: tokenERC20Abi,         
         functionName: 'allowance',
@@ -36,6 +34,16 @@ export default function UserBalance() {
         args:[address]
       })
 
+      const {data:balanceERC721, refetch: balanceERC721Refetch} = useReadContract({
+        abi: myContractAbi,
+        address: myContractAddress as EthAddress,
+        functionName: 'getBalance',
+        args:[address]
+      })
+
+      console.log("balanceERC721",balanceERC721);
+      
+
       
 
     const {writeContract: mintWriteContract} = useWriteContract({
@@ -47,7 +55,25 @@ export default function UserBalance() {
        }
     }) 
 
-    const {writeContractAsync:approveWriteContract} = useWriteContract() 
+    const {writeContractAsync:approveWriteContract} = useWriteContract({
+        mutation:{
+            onError:(err)=> console.log(err),
+            onSuccess:()=>{
+                allowanceRefetch()
+            }
+       }
+    }) 
+
+    const {writeContract: depositWriteContract} = useWriteContract({
+        mutation:{
+            onError:(err)=> console.log(err),
+            onSuccess:()=>{
+                depositRefetch()
+                balanceRefetch()
+                allowanceRefetch()
+            }
+       }
+    }) 
 
     function mint(){
         if(address && balance)
@@ -55,21 +81,22 @@ export default function UserBalance() {
                 address: tokenAddress as EthAddress,
                 abi:tokenERC20Abi,
                 functionName: 'mint',
-                args: [address, parseEther(`${1*10**balance.decimals}`)],
+                args: [address, parseEther("10000")],
             })
       }
 
+
       async function handleDeposit(){
         if(address && balance) {
-
-            if (Number(allowance as bigint) > 1) {
+            console.log(allowance, 1);
+            if (allowance as bigint >= 10000) {
                 console.log(">");
                 
-                mintWriteContract({
+                depositWriteContract({
                     address: myContractAddress as EthAddress,
                     abi:myContractAbi,
                     functionName: 'depositToken',
-                    args: [parseEther(`${1}`)],
+                    args: [parseEther("10000")],
                 })
 
                 return
@@ -80,21 +107,20 @@ export default function UserBalance() {
                 address: tokenAddress as EthAddress,  
                 abi: tokenERC20Abi,         
                 functionName: 'approve',
-                args: [myContractAddress, 1], 
-            }).then((data)=> console.log(data))
+                args: [myContractAddress, parseEther("1")], 
+            }).then((data)=> console.log("approve",data)).catch(()=> console.log("error"))
         }
             
       }
-
-      console.log(Number(deposit as bigint));
       
+console.log("deposit",deposit);
 
 
   
     return (
       <div>
-        UserBalance: { Number(balance?.formatted)?Number(balance!.formatted)/(10**balance!.decimals):undefined  } { balance?.symbol }
-        UserDeposit: { Number(deposit as bigint)?Number(deposit as bigint)/(10**balance!.decimals):undefined }
+        UserBalance: { balance?.formatted} { balance?.symbol }
+        UserDeposit: { Number(deposit as bigint)!==undefined && balance?Number(deposit as bigint)/(10**balance.decimals):undefined}
         <button onClick={mint}>mint</button>
         <button onClick={handleDeposit}>deposit</button>
       </div>

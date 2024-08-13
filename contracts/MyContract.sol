@@ -39,4 +39,8 @@ contract MyContract is ERC721 {
     function depositOf(address account) external view returns (uint256) {
         return deposit[account];
     }
+
+    function getBalance(address owner) external view returns (uint256) {
+        return balanceOf(owner);
+    }
 }
