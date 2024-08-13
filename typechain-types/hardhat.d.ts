@@ -13,53 +13,9 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "AccessControlUpgradeable",
+      name: "Ownable",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AccessControlUpgradeable__factory>;
-    getContractFactory(
-      name: "IAccessControlUpgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IAccessControlUpgradeable__factory>;
-    getContractFactory(
-      name: "OwnableUpgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.OwnableUpgradeable__factory>;
-    getContractFactory(
-      name: "Initializable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Initializable__factory>;
-    getContractFactory(
-      name: "ReentrancyGuardUpgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ReentrancyGuardUpgradeable__factory>;
-    getContractFactory(
-      name: "ERC721Upgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC721Upgradeable__factory>;
-    getContractFactory(
-      name: "IERC721MetadataUpgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721MetadataUpgradeable__factory>;
-    getContractFactory(
-      name: "IERC721ReceiverUpgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721ReceiverUpgradeable__factory>;
-    getContractFactory(
-      name: "IERC721Upgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721Upgradeable__factory>;
-    getContractFactory(
-      name: "ContextUpgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ContextUpgradeable__factory>;
-    getContractFactory(
-      name: "ERC165Upgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC165Upgradeable__factory>;
-    getContractFactory(
-      name: "IERC165Upgradeable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC165Upgradeable__factory>;
+    ): Promise<Contracts.Ownable__factory>;
     getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -69,82 +25,51 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20Metadata__factory>;
     getContractFactory(
-      name: "IERC20Permit",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC20Permit__factory>;
-    getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
     getContractFactory(
-      name: "LogicContract",
+      name: "ERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LogicContract__factory>;
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "IERC721Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Metadata__factory>;
+    getContractFactory(
+      name: "IERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721__factory>;
+    getContractFactory(
+      name: "IERC721Receiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Receiver__factory>;
+    getContractFactory(
+      name: "ERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC165__factory>;
+    getContractFactory(
+      name: "IERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC165__factory>;
+    getContractFactory(
+      name: "ITokenERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITokenERC20__factory>;
+    getContractFactory(
+      name: "MyContract",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MyContract__factory>;
     getContractFactory(
       name: "TokenERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TokenERC20__factory>;
 
     getContractAt(
-      name: "AccessControlUpgradeable",
+      name: "Ownable",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.AccessControlUpgradeable>;
-    getContractAt(
-      name: "IAccessControlUpgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IAccessControlUpgradeable>;
-    getContractAt(
-      name: "OwnableUpgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.OwnableUpgradeable>;
-    getContractAt(
-      name: "Initializable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Initializable>;
-    getContractAt(
-      name: "ReentrancyGuardUpgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ReentrancyGuardUpgradeable>;
-    getContractAt(
-      name: "ERC721Upgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC721Upgradeable>;
-    getContractAt(
-      name: "IERC721MetadataUpgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC721MetadataUpgradeable>;
-    getContractAt(
-      name: "IERC721ReceiverUpgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC721ReceiverUpgradeable>;
-    getContractAt(
-      name: "IERC721Upgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC721Upgradeable>;
-    getContractAt(
-      name: "ContextUpgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ContextUpgradeable>;
-    getContractAt(
-      name: "ERC165Upgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC165Upgradeable>;
-    getContractAt(
-      name: "IERC165Upgradeable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC165Upgradeable>;
+    ): Promise<Contracts.Ownable>;
     getContractAt(
       name: "ERC20",
       address: string,
@@ -156,20 +81,50 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20Metadata>;
     getContractAt(
-      name: "IERC20Permit",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC20Permit>;
-    getContractAt(
       name: "IERC20",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20>;
     getContractAt(
-      name: "LogicContract",
+      name: "ERC721",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.LogicContract>;
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "IERC721Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Metadata>;
+    getContractAt(
+      name: "IERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721>;
+    getContractAt(
+      name: "IERC721Receiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Receiver>;
+    getContractAt(
+      name: "ERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC165>;
+    getContractAt(
+      name: "IERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC165>;
+    getContractAt(
+      name: "ITokenERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITokenERC20>;
+    getContractAt(
+      name: "MyContract",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MyContract>;
     getContractAt(
       name: "TokenERC20",
       address: string,
