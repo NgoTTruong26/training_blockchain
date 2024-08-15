@@ -19,14 +19,14 @@ const config: any = {
         hardhat: {
             blockGasLimit: 30_000_000,
             throwOnCallFailures: false,
-            allowUnlimitedContractSize: false,
+            allowUnlimitedContractSize: true,
         },
         localhost: {
             url: "http://127.0.0.1:8545",
         },
         tBSC: {
-            url: "https://bsc-testnet.nodereal.io/v1/ea9698803a31428c95ee6098cbcf529e",
-            accounts: ["3ee200acb8f82894d1ef0ef8653d86d95d80fdc9ac26fb2145159202cda5b49b"],
+            url: "https://bsc-testnet.infura.io/v3/317b537f510e4a40a6126d2ee0e11b92",
+            accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
             chainId: 97,
         },
         bsc_mainnet: {
@@ -35,7 +35,7 @@ const config: any = {
             accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
         },
     },
-    allowUnlimitedContractSize: true,
+
 };
 
 export default config;

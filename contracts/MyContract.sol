@@ -12,12 +12,21 @@ interface ITokenERC20 is IERC20 {
 
 contract MyContract is ERC721 {
 
+    string private _name = "MyNFT";
+    string private _symbol = "MNFT";
+
     ITokenERC20 public tokenErc20; 
     uint private tokenIdCounter;
 
     mapping (address => uint) deposit;
 
-    constructor(address _tokenErc20) ERC721("MyNFT", "MNFT") {
+    struct NFTInfo {
+        string name;
+        string symbol;
+        uint256 balance;
+    }
+
+    constructor(address _tokenErc20) ERC721(_name, _symbol) {
         tokenErc20 = ITokenERC20(_tokenErc20);
     }
 
@@ -26,7 +35,7 @@ contract MyContract is ERC721 {
         require(tokenErc20.transferFrom(msg.sender, address(this), amount), "Transfer failed");
         deposit[msg.sender] += amount;
 
-        if (deposit[msg.sender] >= 10000 * 10 ** tokenErc20.decimals()) {
+        if (balanceOf(msg.sender)==0 && deposit[msg.sender] >= 10000 * 10 ** tokenErc20.decimals()) {
             _mintNFT(msg.sender);
         }
     }
@@ -40,7 +49,11 @@ contract MyContract is ERC721 {
         return deposit[account];
     }
 
-    function getBalance(address owner) external view returns (uint256) {
-        return balanceOf(owner);
+    function getBalance(address owner) external view returns (NFTInfo memory) {
+        return NFTInfo({
+            name: _name,
+            symbol: _symbol,
+            balance: balanceOf(owner)
+        });
     }
 }

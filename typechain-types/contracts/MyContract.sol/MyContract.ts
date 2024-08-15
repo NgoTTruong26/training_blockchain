@@ -27,6 +27,20 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace MyContract {
+  export type NFTInfoStruct = {
+    name: PromiseOrValue<string>;
+    symbol: PromiseOrValue<string>;
+    balance: PromiseOrValue<BigNumberish>;
+  };
+
+  export type NFTInfoStructOutput = [string, string, BigNumber] & {
+    name: string;
+    symbol: string;
+    balance: BigNumber;
+  };
+}
+
 export interface MyContractInterface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
@@ -290,7 +304,7 @@ export interface MyContract extends BaseContract {
     getBalance(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[MyContract.NFTInfoStructOutput]>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -377,7 +391,7 @@ export interface MyContract extends BaseContract {
   getBalance(
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<MyContract.NFTInfoStructOutput>;
 
   isApprovedForAll(
     owner: PromiseOrValue<string>,
@@ -464,7 +478,7 @@ export interface MyContract extends BaseContract {
     getBalance(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<MyContract.NFTInfoStructOutput>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
